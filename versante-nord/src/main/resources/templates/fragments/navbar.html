@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+  </head>
+  <body>
+    <th:block th:fragment="navbar">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" th:href="@{/}">Versante Nord</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <!-- TODO: implementare link -->
+                <a class="nav-link" th:href="@{/}">Lista pubblicazioni</a>
+              </li>
+              <li class="nav-item">
+                <!-- TODO: implementare link -->
+                <a class="nav-link" th:href="@{/}">Categorie</a>
+              </li>
+              <li class="nav-item">
+                <!-- TODO: implementare link -->
+                <a class="nav-link" th:href="@{/}">Regioni</a>
+              </li>
+
+              <!-- TODO: implementare security -->
+              <!-- <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+                <a class="nav-link" th:href="@{/ingredients}">Lista ingredienti</a>
+              </li> -->
+            </ul>
+            <!-- TODO: personalizzare e spostare barra di ricerca nelle pagine singole -->
+            <!-- <form class="d-flex ms-auto me-3" role="search" th:action="@{/pizzas/search}" method="get">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+            <!-- TODO: personalizzare info utente -->
+            <div class="ms-auto user-info d-flex align-items-center">
+              Logged user:
+              <span sec:authentication="name" class="fs-6 me-2"></span> Roles:
+              <span sec:authentication="authorities" class="fs-6 me-2"></span>
+              <a class="btn btn-sm btn-outline-danger" href="/logout"
+                >Sign out</a
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+    </th:block>
+  </body>
+</html>
