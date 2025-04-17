@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:replace="~{fragments/resources :: styling}" />
+    <title>Versante Nord</title>
+  </head>
+  <body>
+    <header>
+      <th:block th:replace="~{fragments/navbar}" />
+    </header>
+    <main>
+      <div class="container">
+        <section class="my-5">
+          <h1 th:if="${edit}" class="mb-3">Modifica: [[${book.titolo}]]</h1>
+          <h1 th:unless="${edit}" class="mb-3">Crea nuova pubblicazione</h1>
+          <form
+            class="row g-3"
+            th:action="${edit} ? @{/books/edit/{id} (id=*{id})} : @{/books/create}"
+            th:object="${book}"
+            method="post"
+          >
+            <!-- ^ input nascosto per creazione entità legate a book, rimuovere da qui e inserire nel create-or-edit delle altre entità -->
+            <!-- <input type="hidden" th:field="*{book}" id="input-book" /> -->
+
+            <div class="col-12">
+              <label for="titolo" class="form-label">Titolo:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="titolo"
+                th:field="*{titolo}"
+                th:errorClass="is-invalid"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('titolo')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('titolo')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="sottotitolo" class="form-label">Sottotitolo:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="sottotitolo"
+                th:field="*{sottotitolo}"
+                th:errorClass="is-invalid"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('sottotitolo')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('sottotitolo')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="autore" class="form-label">Autore:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="sottotitolo"
+                th:field="*{autore}"
+                th:errorClass="is-invalid"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('autore')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('autore')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="descrizione" class="form-label">Descrizione:</label>
+              <textarea
+                type="text"
+                class="form-control"
+                id="descrizione"
+                th:field="*{descrizione}"
+                th:errorClass="is-invalid"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('descrizione')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('descrizione')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="isbn" class="form-label">ISBN:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="sottotitolo"
+                th:field="*{isbn}"
+                th:errorClass="is-invalid"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('isbn')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('isbn')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <label for="prezzo" class="form-label">Prezzo:</label>
+              <input
+                type="number"
+                step="0.10"
+                class="form-control"
+                id="prezzo"
+                th:field="*{prezzo}"
+                th:errorClass="is-invalid"
+                min="0"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('prezzo')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('prezzo')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <label for="pagine" class="form-label">Pagine:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="prezzo"
+                th:field="*{pagine}"
+                th:errorClass="is-invalid"
+                min="0"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('pagine')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('pagine')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <label for="dataPubblicazione" class="form-label"
+                >Data di pubblicazione:</label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="dataPubblicazione"
+                th:field="*{dataPubblicazione}"
+                th:errorClass="is-invalid"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('dataPubblicazione')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('dataPubblicazione')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="immagine" class="form-label">Immagine:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="immagine"
+                th:field="*{immagine}"
+                th:errorClass="is-invalid"
+              />
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('immagine')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('immagine')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="div d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary">
+                Salva pubblicazione
+              </button>
+              <button type="reset" class="btn btn-warning">
+                Reset dei campi
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

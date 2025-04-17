@@ -30,4 +30,22 @@ public class BookService {
 
         return bookOpt.get();
     }
+
+    public Book create(Book book) {
+        
+        return bookRepository.save(book);
+    }
+
+    public Book update(Book book) {
+        
+        return bookRepository.save(book);
+    }
+
+    public void deleteById(Integer id) {
+        bookRepository.deleteById(id);
+    }
+
+    public void delete(Book book) {
+        bookRepository.delete(book);
+    }
 }

@@ -1,6 +1,7 @@
 package org.lessons.java.versante_nord.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,11 +33,21 @@ public class Book {
     @Lob
     private String descrizione;
 
-    @NotNull
+    @NotBlank(message = "il campo ISBN è obbligatorio")
+    @Size(min = 10, max = 13, message = "il campo ISBN deve essere tra 10 e 13 caratteri")
+    private String isbn;
+
+    private LocalDate dataPubblicazione;
+
+    @NotNull(message = "il campo prezzo è obbligatorio")
     @Min(value = 0, message = "il campo prezzo deve essere maggiore di 0")
     private BigDecimal prezzo;
 
     private String immagine;
+
+    @NotNull(message = "il campo pagine è obbligatorio")
+    @Min(value = 1, message = "il campo pagine deve essere maggiore di 0")
+    private Integer pagine;
 
 
     public Integer getId() {
@@ -95,5 +106,37 @@ public class Book {
         this.immagine = immagine;
     }
 
+
+    public LocalDate getDataPubblicazione() {
+        return this.dataPubblicazione;
+    }
+
+    public void setDataPubblicazione(LocalDate dataPubblicazione) {
+        this.dataPubblicazione = dataPubblicazione;
+    }
+
+
+    public String getIsbn() {
+        return this.isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Integer getPagine() {
+        return this.pagine;
+    }
+
+    public void setPagine(Integer pagine) {
+        this.pagine = pagine;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [id=" + id + ", titolo=" + titolo + ", sottotitolo=" + sottotitolo + ", autore=" + autore
+                + ", descrizione=" + descrizione + ", isbn=" + isbn + ", dataPubblicazione=" + dataPubblicazione
+                + ", prezzo=" + prezzo + ", immagine=" + immagine + ", pagine=" + pagine + "]";
+    }
 
 }

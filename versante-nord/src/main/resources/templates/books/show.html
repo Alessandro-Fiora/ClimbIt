@@ -102,7 +102,36 @@
                           <span class="badge rounded-pill text-bg-success">Regione</span>
                         </div>
                         <div class="col-12">
-                            <p th:text="*{descrizione}" />
+                          <div class="accordion accordion-flush" id="bookShowAccordion">
+                            <div th:if="*{descrizione} != null  and *{descrizione} != ''" class="accordion-item">
+                              <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  Descrizione
+                                </button>
+                              </h2>
+                              <div id="flush-collapseOne" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                  <p th:text="*{descrizione}" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-item">
+                              <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                  Dettagli
+                                </button>
+                              </h2>
+                              <div id="flush-collapseTwo" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                  <ul>
+                                    <li th:text="'ISBN: ' + *{isbn}" />
+                                    <li th:text="'Pagine: ' + *{pagine}" />
+                                    <li th:if="*{dataPubblicazione != null}" th:text="'Data di pubblicazione: ' + *{dataPubblicazione}" />
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
                         <!-- <div class="row mt-4" th:if="${book.categorie.size() > 0}">
