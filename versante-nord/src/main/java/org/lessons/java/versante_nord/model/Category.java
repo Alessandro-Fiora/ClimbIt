@@ -25,9 +25,9 @@ public class Category {
     @NotBlank (message = "il campo nome è obbligatorio")
     private String nome;
 
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
-    @JsonBackReference
-    private List<Book> books;
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+@JsonBackReference
+private List<Book> books;
 
 
     public Integer getId() {
