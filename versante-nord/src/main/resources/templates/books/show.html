@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <th:block th:replace="~{fragments/resources :: styling}" />
-    <title>Lista pubblicazioni</title>
+    <title>Versante Nord</title>
   </head>
   <body>
     <header>
@@ -13,56 +13,29 @@
     <main>
       <div class="container">
         <section class="my-5">
-          <div class="d-flex justify-content-between">
-            <h1 class="mb-3">Lista pubblicazioni</h1>
-            <div class="d-flex align-items-center">
-              <!-- <h3
-                class="d-inline me-2 mb-0"
-                th:text="'Ciao ' + ${username}"
-              ></h3> -->
-              <a class="btn btn-primary" th:href="@{/books/create-or-edit}">
-                Aggiungi una nuova pubblicazione
-              </a>
-            </div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-12">
-              <table th:if="${books.size() > 0}" class="table mt-3">
-                <thead>
-                  <tr>
-                    <th scope="col">Titolo</th>
-                    <th scope="col">Autore</th>
-                    <th scope="col">Prezzo</th>
-                    <!-- <th scope="col">Regione</th>
-                    <th scope="col">Categorie</th> -->
-                    <th scope="col">Azioni</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="book : ${books}" th:object="${book}">
-                    <td th:text="*{titolo}"></td>
-                    <td th:text="*{autore}"></td>
-                    <td th:text="'€ ' + *{prezzo}"></td>
-                    <!-- <td th:text="*{regione}"></td>
-                    <td th:text="*{categorie}"></td> -->
-                    <td>
-                      <a th:href="@{/books/{id}(id=*{id})}">
-                        <button class="btn btn-success rounded-3">
-                          <i class="fa-solid fa-eye"></i>
-                        </button>
-                      </a>
-                      <a
-                        th:href="@{/books/edit/{id}(id=*{id}, redirect='index')}"
-                      >
+          <th:block th:if="${book != null}" th:object="${book}">
+            <div class="row">
+                <div class="col-4">
+                    <img class="copertina img-fluid" th:src="*{immagine}" alt="">
+                </div>
+                <div class="col-8">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h1 class="fw-bold" th:text="*{titolo}" />
+                      <h5 class="mb-3" th:text="*{sottotitolo}" />
+                      <h6 class="fw-light mb-4" th:text="*{autore}" />
+                      <h6 class="mb-4" th:text="'€ ' + *{prezzo}" />
+                    </div>
+                    <div>
+                      <a th:href="@{/books/edit/{id}(id=*{id}, redirect='show')}">
                         <button class="btn btn-warning rounded-3">
                           <i class="fa-solid fa-pencil"></i>
                         </button>
                       </a>
                       <form
-                        class="d-inline"
-                        th:action="@{/books/delete/{id}(id=*{id})}"
-                        method="post"
+                      class="d-inline"
+                      th:action="@{/books/delete/{id}(id=*{id})}"
+                      method="post"
                       >
                         <button
                           type="button"
@@ -118,18 +91,41 @@
                             </div>
                           </div>
                         </div>
-                      </form>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                    </form>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                          <!-- TODO: generare pill dinamicamente a partire dalle categorie e dalla regione -->
+                          <span class="badge rounded-pill text-bg-primary">Categoria</span>
+                          <span class="badge rounded-pill text-bg-primary">Categoria</span>
+                          <span class="badge rounded-pill text-bg-success">Regione</span>
+                        </div>
+                        <div class="col-12">
+                            <p th:text="*{descrizione}" />
+                        </div>
 
-              <h2 th:unless="${books.size() > 0}" class="text-center">
-                No data found
-              </h2>
+                        <!-- <div class="row mt-4" th:if="${book.categorie.size() > 0}">
+                          <div class="col-12">
+                          <h4>Categorie</h4>
+                          <ul>
+                            <li th:each="categoria : ${book.categorie}" th:text="${categoria.nome}"></li>
+                          </ul>
+                          </div>
+                        </div> -->
+
+                    </div>
+                </div>
             </div>
-          </div>
+
+
+          </th:block>
+          <h2 th:unless="${book != null}" class="text-center">
+            No data found
+          </h2>
         </section>
+
+
       </div>
     </main>
 

@@ -30,7 +30,6 @@ public class Book {
     private String autore;
 
     @Lob
-    @Size(max = 255, message = "il campo descrizione deve essere lungo massimo 255 caratteri")
     private String descrizione;
 
     @NotNull

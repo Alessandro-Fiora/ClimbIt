@@ -7,7 +7,10 @@
   </head>
   <body>
     <th:block th:fragment="navbar">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+        data-bs-theme="dark"
+      >
         <div class="container-fluid">
           <a class="navbar-brand" th:href="@{/}">Versante Nord</a>
           <button
@@ -24,8 +27,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <!-- TODO: implementare link -->
-                <a class="nav-link" th:href="@{/}">Lista pubblicazioni</a>
+                <a class="nav-link" th:href="@{/books}">Lista pubblicazioni</a>
               </li>
               <li class="nav-item">
                 <!-- TODO: implementare link -->
@@ -47,13 +49,11 @@
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form> -->
             <!-- TODO: personalizzare info utente -->
-            <div class="ms-auto user-info d-flex align-items-center">
-              Logged user:
+            <div class="ms-auto user-info d-flex align-items-center text-light">
+              Ciao,
               <span sec:authentication="name" class="fs-6 me-2"></span> Roles:
               <span sec:authentication="authorities" class="fs-6 me-2"></span>
-              <a class="btn btn-sm btn-outline-danger" href="/logout"
-                >Sign out</a
-              >
+              <a class="btn btn-sm btn-danger" href="/logout">Sign out</a>
             </div>
           </div>
         </div>
