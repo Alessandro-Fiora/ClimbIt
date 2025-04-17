@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.lessons.java.versante_nord.model.Book;
 import org.lessons.java.versante_nord.service.BookService;
+import org.lessons.java.versante_nord.service.CategoryService;
 import org.lessons.java.versante_nord.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class BookController {
 
     @Autowired
     private RegionService regionService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping
     public String index(Model model) {
@@ -50,6 +54,7 @@ public class BookController {
         book.setImmagine("https://fakeimg.pl/456x638/ff6666/ffffff?text=Book%20Cover");
         model.addAttribute("book", book);
         model.addAttribute("regions", regionService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
 
         return "books/create-or-edit";
     }
@@ -59,6 +64,8 @@ public class BookController {
         
         if(bindingResult.hasErrors()){
             model.addAttribute("regions", regionService.findAll());
+            model.addAttribute("categories", categoryService.findAll());
+
 
             return "books/create-or-edit";
         }
@@ -73,6 +80,8 @@ public class BookController {
         model.addAttribute("edit", true);
         model.addAttribute("book", bookService.getById(id));
         model.addAttribute("regions", regionService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
+
 
         return "books/create-or-edit";
     }
@@ -81,6 +90,8 @@ public class BookController {
     public String update(@Valid @ModelAttribute("book") Book formBook, BindingResult bindingResult, Model model ) {
         if(bindingResult.hasErrors()){
             model.addAttribute("regions", regionService.findAll());
+            model.addAttribute("categories", categoryService.findAll());
+
 
             return "books/create-or-edit";
         }

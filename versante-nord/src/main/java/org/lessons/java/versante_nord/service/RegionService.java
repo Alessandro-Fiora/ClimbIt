@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegionService {
     
-     @Autowired
+    @Autowired
     private RegionRepository regionRepository;
 
     public List<Region> findAll() {

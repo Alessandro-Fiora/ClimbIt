@@ -96,9 +96,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12 mb-3">
-                          <!-- TODO: generare pill dinamicamente a partire dalle categorie e dalla regione -->
-                          <span class="badge rounded-pill text-bg-primary">Categoria</span>
-                          <span class="badge rounded-pill text-bg-primary">Categoria</span>
+                          <span th:each="category : ${book.categories}" class="badge category-badge rounded-pill text-bg-primary ms-1" th:text="${category.nome}"></span>
                           <span th:if="*{region} != null" class="badge rounded-pill text-bg-success" th:text="*{region.getNome()}"></span>
                         </div>
                         <div class="col-12">

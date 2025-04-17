@@ -3,6 +3,8 @@ a {
   color: inherit;
 }
 
+/* * ACCORDION */
+
 .accordion-button:focus {
   box-shadow: none !important;
 }

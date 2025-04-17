@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:replace="~{fragments/resources :: styling}" />
+    <title>Dettaglio Categoria</title>
+  </head>
+  <body>
+    <header>
+      <th:block th:replace="~{fragments/navbar}" />
+    </header>
+    <main>
+      <div class="container">
+        <section class="my-5">
+          <th:block th:if="${category != null}" th:object="${category}">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex justify-content-between">
+                  <div class="mb-5">
+                    <h1 class="mb-3" th:text="*{nome}" />
+                    <h6
+                      th:text="'Pubblicazioni: ' + ${category.books.size()}"
+                    />
+                  </div>
+                  <div>
+                    <a th:href="@{/categories}">
+                      <button class="btn btn-primary rounded-3">
+                        <i class="fa-solid fa-reply"></i>
+                      </button>
+                    </a>
+                    <a th:href="@{/categories/edit/{id} (id=*{id})}">
+                      <button class="btn btn-warning rounded-3">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                    </a>
+                    <form
+                      class="d-inline"
+                      th:action="@{/categories/delete/{id}(id=*{id})}"
+                      method="post"
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        th:data-bs-target="'#modal-' + ${category.id}"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                      <div
+                        class="modal fade"
+                        th:id="'modal-' + ${category.id}"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabindex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1
+                                class="modal-title fs-5"
+                                id="staticBackdropLabel"
+                              >
+                                Elimina categoria [[*{nome}]]
+                              </h1>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>
+                                Sei sicuro? L'operazione è irreversibile<br />
+                                <i
+                                  class="fa-solid fa-triangle-exclamation"
+                                  style="color: #ebb800"
+                                ></i>
+                                Verranno eliminate tutte le pubblicazioni
+                                relative a questa categoria!
+                                <i
+                                  class="fa-solid fa-triangle-exclamation"
+                                  style="color: #ebb800"
+                                ></i>
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                              >
+                                Annulla
+                              </button>
+                              <button
+                                type="submit"
+                                class="btn btn-danger rounded-3"
+                              >
+                                Elimina
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th:block>
+
+          <div class="row">
+            <div class="col-12">
+              <table th:if="${category.books.size() > 0}" class="table mt-3">
+                <thead>
+                  <tr>
+                    <th scope="col">Titolo</th>
+                    <th scope="col">Autore</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Azioni</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="book : ${category.books}" th:object="${book}">
+                    <td th:text="*{titolo}"></td>
+                    <td th:text="*{autore}"></td>
+                    <td th:text="'€ ' + *{prezzo}"></td>
+                    <td th:text="*{isbn}"></td>
+                    <td>
+                      <a th:href="@{/books/{id}(id=*{id})}">
+                        <button class="btn btn-success rounded-3">
+                          <i class="fa-solid fa-eye"></i>
+                        </button>
+                      </a>
+                      <a
+                        th:href="@{/books/edit/{id}(id=*{id}, redirect='index')}"
+                      >
+                        <button class="btn btn-warning rounded-3">
+                          <i class="fa-solid fa-pencil"></i>
+                        </button>
+                      </a>
+                      <form
+                        class="d-inline"
+                        th:action="@{/books/delete/{id}(id=*{id})}"
+                        method="post"
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          data-bs-toggle="modal"
+                          th:data-bs-target="'#modal-' + ${book.id}"
+                        >
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <div
+                          class="modal fade"
+                          th:id="'modal-' + ${book.id}"
+                          data-bs-backdrop="static"
+                          data-bs-keyboard="false"
+                          tabindex="-1"
+                          aria-labelledby="staticBackdropLabel"
+                          aria-hidden="true"
+                        >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1
+                                  class="modal-title fs-5"
+                                  id="staticBackdropLabel"
+                                >
+                                  Elimina pubblicazione [[*{titolo}]]
+                                </h1>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>Sei sicuro? L'operazione è irreversibile</p>
+                              </div>
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Annulla
+                                </button>
+                                <button
+                                  type="submit"
+                                  class="btn btn-danger rounded-3"
+                                >
+                                  Elimina
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h2 th:unless="${category.books.size() > 0}" class="text-center">
+                Nessuna pubblicazione trovata per questa categoria
+              </h2>
+            </div>
+          </div>
+
+          <h2 th:unless="${category != null}" class="text-center">
+            Nessuna categoria trovata
+          </h2>
+        </section>
+      </div>
+    </main>
+
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>

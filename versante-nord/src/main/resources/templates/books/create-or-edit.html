@@ -161,6 +161,24 @@
               </div>
             </div>
 
+            <div class="col-12">
+              <label class="form-label">Categorie:</label>
+              <div th:each="category : ${categories}" class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  th:id="|category-${category.id}|"
+                  th:field="${book.categories}"
+                  th:value="${category.id}"
+                />
+                <label
+                  th:for="|category-${category.id}|"
+                  class="form-check-label"
+                  th:text="${category.nome}"
+                ></label>
+              </div>
+            </div>
+
             <div class="col-4">
               <label for="prezzo" class="form-label">Prezzo:</label>
               <input
