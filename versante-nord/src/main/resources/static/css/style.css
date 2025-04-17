@@ -4,6 +4,10 @@ a {
 }
 
 .accordion-button:focus {
+  box-shadow: none !important;
+}
+
+.accordion-button:hover {
   box-shadow: 0px 1px 0 0 rgba(160, 0, 0, 0.821) !important;
 }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <th:block th:replace="~{fragments/resources :: styling}" />
-    <title>Lista pubblicazioni</title>
+    <title>Versante Nord</title>
   </head>
   <body>
     <header>
@@ -13,27 +13,110 @@
     <main>
       <div class="container">
         <section class="my-5">
-          <div class="d-flex justify-content-between">
-            <h1 class="mb-3">Lista pubblicazioni</h1>
-            <div class="d-flex align-items-center">
-              <!-- <h3
-                class="d-inline me-2 mb-0"
-                th:text="'Ciao ' + ${username}"
-              ></h3> -->
-              <a class="btn btn-primary" th:href="@{/books/create}">
-                Aggiungi una nuova pubblicazione
-              </a>
+          <th:block th:if="${region != null}" th:object="${region}">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex justify-content-between">
+                  <div class="mb-5">
+                    <h1 class="mb-3" th:text="*{nome}" />
+                    <h6 th:text="'Pubblicazioni: ' + ${region.books.size()}" />
+                  </div>
+                  <div>
+                    <a th:href="@{/regions}">
+                      <button class="btn btn-primary rounded-3">
+                        <i class="fa-solid fa-reply"></i>
+                      </button>
+                    </a>
+                    <a th:href="@{/regions/edit/{id} (id=*{id})}">
+                      <button class="btn btn-warning rounded-3">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                    </a>
+                    <form
+                      class="d-inline"
+                      th:action="@{/regions/delete/{id}(id=*{id})}"
+                      method="post"
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-bs-toggle="modal"
+                        th:data-bs-target="'#modal-' + ${region.id}"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                      <div
+                        class="modal fade"
+                        th:id="'modal-' + ${region.id}"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabindex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1
+                                class="modal-title fs-5"
+                                id="staticBackdropLabel"
+                              >
+                                Elimina regione [[*{nome}]]
+                              </h1>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <p>
+                                Sei sicuro? L'operazione è irreversibile<br />
+                                <i
+                                  class="fa-solid fa-triangle-exclamation"
+                                  style="color: #ebb800"
+                                ></i>
+                                Verranno eliminate tutte le pubblicazioni
+                                relative a questa regione!
+                                <i
+                                  class="fa-solid fa-triangle-exclamation"
+                                  style="color: #ebb800"
+                                ></i>
+                              </p>
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                              >
+                                Annulla
+                              </button>
+                              <button
+                                type="submit"
+                                class="btn btn-danger rounded-3"
+                              >
+                                Elimina
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <hr />
+          </th:block>
+
           <div class="row">
             <div class="col-12">
-              <table th:if="${books.size() > 0}" class="table mt-3">
+              <table th:if="${region.books.size() > 0}" class="table mt-3">
                 <thead>
                   <tr>
                     <th scope="col">Titolo</th>
                     <th scope="col">Autore</th>
-                    <th scope="col">Regione</th>
                     <th scope="col">Prezzo</th>
                     <th scope="col">ISBN</th>
                     <!-- <th scope="col">Regione</th>
@@ -42,12 +125,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="book : ${books}" th:object="${book}">
+                  <tr th:each="book : ${region.books}" th:object="${book}">
                     <td th:text="*{titolo}"></td>
                     <td th:text="*{autore}"></td>
-                    <td th:text="*{region.getNome()}"></td>
                     <td th:text="'€ ' + *{prezzo}"></td>
                     <td th:text="*{isbn}"></td>
+
+                    <!-- <td th:text="*{regione}"></td>
+                    <td th:text="*{categorie}"></td> -->
                     <td>
                       <a th:href="@{/books/{id}(id=*{id})}">
                         <button class="btn btn-success rounded-3">
@@ -126,11 +211,15 @@
                 </tbody>
               </table>
 
-              <h2 th:unless="${books.size() > 0}" class="text-center">
-                No data found
+              <h2 th:unless="${region.books.size() > 0}" class="text-center">
+                Nessuna pubblicazione trovata per questa regione
               </h2>
             </div>
           </div>
+
+          <h2 th:unless="${region != null}" class="text-center">
+            No data found
+          </h2>
         </section>
       </div>
     </main>

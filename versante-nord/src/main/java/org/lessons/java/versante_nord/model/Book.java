@@ -3,11 +3,16 @@ package org.lessons.java.versante_nord.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -48,6 +53,12 @@ public class Book {
     @NotNull(message = "il campo pagine è obbligatorio")
     @Min(value = 1, message = "il campo pagine deve essere maggiore di 0")
     private Integer pagine;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id", nullable = false)
+    @JsonBackReference
+    @NotNull(message = "il campo regione è obbligatorio")
+    private Region region;
 
 
     public Integer getId() {
@@ -131,6 +142,16 @@ public class Book {
     public void setPagine(Integer pagine) {
         this.pagine = pagine;
     }
+
+
+    public Region getRegion() {
+        return this.region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
 
     @Override
     public String toString() {

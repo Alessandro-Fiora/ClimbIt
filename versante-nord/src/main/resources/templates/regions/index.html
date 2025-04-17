@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <th:block th:replace="~{fragments/resources :: styling}" />
-    <title>Lista pubblicazioni</title>
+    <title>Lista regioni</title>
   </head>
   <body>
     <header>
@@ -14,48 +14,40 @@
       <div class="container">
         <section class="my-5">
           <div class="d-flex justify-content-between">
-            <h1 class="mb-3">Lista pubblicazioni</h1>
+            <h1 class="mb-3">Lista regioni</h1>
             <div class="d-flex align-items-center">
               <!-- <h3
                 class="d-inline me-2 mb-0"
                 th:text="'Ciao ' + ${username}"
               ></h3> -->
-              <a class="btn btn-primary" th:href="@{/books/create}">
-                Aggiungi una nuova pubblicazione
+              <a class="btn btn-primary" th:href="@{/regions/create}">
+                Aggiungi una nuova regione
               </a>
             </div>
           </div>
           <hr />
           <div class="row">
             <div class="col-12">
-              <table th:if="${books.size() > 0}" class="table mt-3">
+              <table th:if="${regions.size() > 0}" class="table mt-3">
                 <thead>
                   <tr>
-                    <th scope="col">Titolo</th>
-                    <th scope="col">Autore</th>
-                    <th scope="col">Regione</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">ISBN</th>
-                    <!-- <th scope="col">Regione</th>
-                    <th scope="col">Categorie</th> -->
+                    <th scope="col">Nome</th>
+                    <th scope="col">Numero pubblicazioni</th>
                     <th scope="col">Azioni</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="book : ${books}" th:object="${book}">
-                    <td th:text="*{titolo}"></td>
-                    <td th:text="*{autore}"></td>
-                    <td th:text="*{region.getNome()}"></td>
-                    <td th:text="'€ ' + *{prezzo}"></td>
-                    <td th:text="*{isbn}"></td>
+                  <tr th:each="region : ${regions}" th:object="${region}">
+                    <td th:text="*{nome}"></td>
+                    <td th:text="*{books.size()}"></td>
                     <td>
-                      <a th:href="@{/books/{id}(id=*{id})}">
+                      <a th:href="@{/regions/{id}(id=*{id})}">
                         <button class="btn btn-success rounded-3">
                           <i class="fa-solid fa-eye"></i>
                         </button>
                       </a>
                       <a
-                        th:href="@{/books/edit/{id}(id=*{id}, redirect='index')}"
+                        th:href="@{/regions/edit/{id}(id=*{id}, redirect='index')}"
                       >
                         <button class="btn btn-warning rounded-3">
                           <i class="fa-solid fa-pencil"></i>
@@ -63,20 +55,20 @@
                       </a>
                       <form
                         class="d-inline"
-                        th:action="@{/books/delete/{id}(id=*{id})}"
+                        th:action="@{/regions/delete/{id}(id=*{id})}"
                         method="post"
                       >
                         <button
                           type="button"
                           class="btn btn-danger"
                           data-bs-toggle="modal"
-                          th:data-bs-target="'#modal-' + ${book.id}"
+                          th:data-bs-target="'#modal-' + ${region.id}"
                         >
                           <i class="fa-solid fa-trash"></i>
                         </button>
                         <div
                           class="modal fade"
-                          th:id="'modal-' + ${book.id}"
+                          th:id="'modal-' + ${region.id}"
                           data-bs-backdrop="static"
                           data-bs-keyboard="false"
                           tabindex="-1"
@@ -90,7 +82,7 @@
                                   class="modal-title fs-5"
                                   id="staticBackdropLabel"
                                 >
-                                  Elimina pubblicazione [[*{titolo}]]
+                                  Elimina regione [[*{nome}]]
                                 </h1>
                                 <button
                                   type="button"
@@ -100,7 +92,19 @@
                                 ></button>
                               </div>
                               <div class="modal-body">
-                                <p>Sei sicuro? L'operazione è irreversibile</p>
+                                <p>
+                                  Sei sicuro? L'operazione è irreversibile<br />
+                                  <i
+                                    class="fa-solid fa-triangle-exclamation"
+                                    style="color: #ebb800"
+                                  ></i>
+                                  Verranno eliminate tutte le pubblicazioni
+                                  relative a questa regione!
+                                  <i
+                                    class="fa-solid fa-triangle-exclamation"
+                                    style="color: #ebb800"
+                                  ></i>
+                                </p>
                               </div>
                               <div class="modal-footer">
                                 <button
@@ -126,7 +130,7 @@
                 </tbody>
               </table>
 
-              <h2 th:unless="${books.size() > 0}" class="text-center">
+              <h2 th:unless="${regions.size() > 0}" class="text-center">
                 No data found
               </h2>
             </div>

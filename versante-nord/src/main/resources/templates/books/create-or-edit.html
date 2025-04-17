@@ -134,6 +134,33 @@
               </div>
             </div>
 
+            <div class="col-12">
+              <label for="region" class="form-label">Regione:</label>
+              <select
+                class="form-select"
+                id="region"
+                th:field="*{region.id}"
+                th:errorClass="is-invalid"
+              >
+                <option
+                  th:each="region : ${regions}"
+                  th:value="${region.id}"
+                  th:text="${region.nome}"
+                ></option>
+              </select>
+              <div
+                class="invalid-feedback"
+                th:if="${#fields.hasErrors('region.id')}"
+              >
+                <ul>
+                  <li
+                    th:each="error : ${#fields.errors('region.id')}"
+                    th:text="${error}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
             <div class="col-4">
               <label for="prezzo" class="form-label">Prezzo:</label>
               <input
