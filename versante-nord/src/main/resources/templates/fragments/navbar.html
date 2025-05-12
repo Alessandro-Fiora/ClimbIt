@@ -35,11 +35,6 @@
               <li class="nav-item">
                 <a class="nav-link" th:href="@{/regions}">Regioni</a>
               </li>
-
-              <!-- TODO: implementare security -->
-              <!-- <li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
-                <a class="nav-link" th:href="@{/ingredients}">Lista ingredienti</a>
-              </li> -->
             </ul>
             <!-- TODO: personalizzare e spostare barra di ricerca nelle pagine singole -->
             <!-- <form class="d-flex ms-auto me-3" role="search" th:action="@{/pizzas/search}" method="get">
@@ -49,7 +44,7 @@
             <!-- TODO: personalizzare info utente -->
             <div class="ms-auto user-info d-flex align-items-center text-light">
               Ciao,
-              <span sec:authentication="name" class="fs-6 me-2"></span> Roles:
+              <span sec:authentication="name" class="fs-6 me-2"></span> Role:
               <span sec:authentication="authorities" class="fs-6 me-2"></span>
               <a class="btn btn-sm btn-danger" href="/logout">Sign out</a>
             </div>

@@ -10,7 +10,29 @@
     <header>
       <th:block th:replace="~{fragments/navbar}" />
     </header>
-    <h1>HOMEPAGE</h1>
+
+    <main>
+      <div
+        class="container d-flex justify-content-center align-items-center gap-3"
+      >
+        <section class="user-info mt-5 text-center">
+          <h1 class="mb-3">
+            Ciao, <span sec:authentication="name" class="fs-1 me-2"></span>
+          </h1>
+
+          <h4 class="mb-3">
+            I tuoi ruoli:
+            <span sec:authentication="authorities" class="fs-4 me-2"></span>
+          </h4>
+
+          <div
+            class="mb-3 fs-4"
+            th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy HH:mm')}"
+          ></div>
+          <a class="btn btn-danger" href="/logout">Sign out</a>
+        </section>
+      </div>
+    </main>
 
     <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
   </body>
