@@ -17,3 +17,16 @@ a {
   color: inherit !important;
   background-color: transparent !important;
 }
+
+/* * LOGO */
+img.logo-img {
+  height: 75px;
+}
+
+img.login-logo-img {
+  height: 300px;
+}
+
+img.home-logo-img {
+  height: 200px;
+}

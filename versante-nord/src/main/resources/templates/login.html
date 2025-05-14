@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:replace="~{fragments/resources :: styling}" />
+    <title>Login</title>
+  </head>
+  <body class="bg-light">
+    <main>
+      <div class="container">
+        <div
+          class="centered-box d-flex justify-content-center align-items-center"
+        >
+          <div class="login-box text-center">
+            <div class="logo-container">
+              <img
+                src="/img/logo.png"
+                alt="logo"
+                class="login-logo-img img-fluid"
+              />
+            <h1>Accedi</h1>
+            <div th:if="${param.error}" class="is-invalid mb-3">
+              Credenziali di accesso non valide
+            </div>
+            <div th:if="${param.logout}" class="mb-3">
+              Hai effettuato il logout con successo
+            </div>
+            <form th:action="@{/login}" method="post">
+              <div class="mb-3">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                />
+              </div>
+              <div class="mb-3">
+                <input
+                  class="form-control"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
+              </div>
+              <input
+                class="btn btn-primary rounded-1"
+                type="submit"
+                value="Log in"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <th:block th:replace="~{fragments/resources :: bootstrapJs}"></th:block>
+  </body>
+</html>
