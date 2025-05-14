@@ -18,10 +18,18 @@ public class SecurityConfig {
     @Bean
     @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+
         http.authorizeHttpRequests()
-                .requestMatchers("/**").hasAuthority("ADMIN")
-                .and().formLogin()
-                .and().logout()
+                .requestMatchers("/books/create", "/books/edit/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/**").hasAuthority("ADMIN")
+                .requestMatchers("/categories", "/categories/**").hasAuthority("ADMIN")
+                .requestMatchers("/regions", "/regions/**").hasAuthority("ADMIN")
+                .requestMatchers("/books", "/books/**").hasAnyAuthority( "ADMIN")
+                .requestMatchers("/").hasAnyAuthority( "ADMIN")
+                .requestMatchers("/**").permitAll()
+                .and().formLogin().loginPage("/login").permitAll()
+                .and().logout().logoutSuccessUrl("/login?logout").permitAll()
                 .and().exceptionHandling()
                 .and().csrf().disable();
 
