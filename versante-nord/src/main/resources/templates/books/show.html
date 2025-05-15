@@ -97,7 +97,7 @@
                     <div class="row">
                         <div class="col-12 mb-3">
                           <a th:href="@{/categories/{id}(id=${category.id})}" th:each="category : ${book.categories}" class="badge category-badge rounded-pill text-bg-primary ms-1" th:text="${category.nome}"></a>
-                          <a th:href="@{/regions/{id}(id=${book.region.id})}" th:if="*{region} != null" class="badge rounded-pill text-bg-success" th:text="*{region.getNome()}"></a>
+                          <a th:href="@{/regions/{id}(id=${book.region.id})}" th:if="*{region} != null" class="badge region-badge rounded-pill text-bg-success" th:text="*{region.getNome()}"></a>
                         </div>
                         <div class="col-12">
                           <div class="accordion accordion-flush" id="bookShowAccordion">

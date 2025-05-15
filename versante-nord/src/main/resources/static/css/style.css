@@ -30,3 +30,13 @@ img.login-logo-img {
 img.home-logo-img {
   height: 200px;
 }
+
+/* * PILL BADGES */
+
+.category-badge:hover {
+  background-color: rgb(2, 95, 177) !important;
+}
+
+.region-badge:hover {
+  background-color: rgb(0, 110, 0) !important;
+}
