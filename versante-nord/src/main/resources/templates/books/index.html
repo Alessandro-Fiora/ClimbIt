@@ -14,11 +14,32 @@
       <div class="container">
         <section class="my-5">
           <div class="d-flex justify-content-between">
-            <h1 class="mb-3">Lista pubblicazioni</h1>
-            <div class="d-flex align-items-center">
-              <a class="btn btn-primary" th:href="@{/books/create}">
-                Aggiungi una nuova pubblicazione
-              </a>
+            <div class="d-flex align-items-end">
+              <h1 class="mb-3 me-3">Lista pubblicazioni</h1>
+              <a
+                class="add-button btn btn-primary mb-3 rounded-5 text-center"
+                th:href="@{/books/create}"
+                ><i class="fa-solid fa-plus"></i
+              ></a>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+              <form
+                class="d-flex ms-auto me-3"
+                role="query"
+                th:action="@{/books/search}"
+                method="get"
+              >
+                <input
+                  class="form-control me-2"
+                  type="query"
+                  name="query"
+                  placeholder="Cerca"
+                  aria-label="Cerca"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
             </div>
           </div>
           <hr />
@@ -38,14 +59,21 @@
                 </thead>
                 <tbody>
                   <tr th:each="book : ${books}" th:object="${book}">
-                    <td th:text="*{titolo}"></td>
+                    <td>
+                      <a
+                        th:href="@{/books/{id}(id=${book.id})}"
+                        th:text="*{titolo}"
+                        class=""
+                      ></a>
+                    </td>
+
                     <td th:text="*{autore}"></td>
                     <td>
                       <span th:if="${book.region != null}">
                         <a
                           th:href="@{/regions/{id}(id=${book.region.id})}"
                           th:text="*{region.nome}"
-                          class="badge category-badge rounded-pill text-bg-success ms-1"
+                          class="badge region-badge rounded-pill text-bg-success ms-1"
                         ></a>
                       </span>
                       <span th:unless="${book.region != null}">N/A</span>
@@ -59,19 +87,19 @@
                       >
                       </a>
                     </td>
-                    <td th:text="'€ ' + *{prezzo}"></td>
+                    <td th:text="'€' + *{prezzo}"></td>
                     <td th:text="*{isbn}"></td>
                     <td>
-                      <div class="d-flex justify-content-between">
+                      <div class="d-flex">
                         <a th:href="@{/books/{id}(id=*{id})}">
-                          <button class="btn btn-success rounded-3">
+                          <button class="btn btn-success rounded-3 me-2">
                             <i class="fa-solid fa-eye"></i>
                           </button>
                         </a>
                         <a
                           th:href="@{/books/edit/{id}(id=*{id}, redirect='index')}"
                         >
-                          <button class="btn btn-warning rounded-3">
+                          <button class="btn btn-warning rounded-3 me-2">
                             <i class="fa-solid fa-pencil"></i>
                           </button>
                         </a>

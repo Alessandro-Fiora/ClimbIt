@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -46,6 +47,14 @@ public class RegionController {
         Region region = new Region();
         model.addAttribute("region", region);
         return "regions/create-or-edit";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("query") String query, Model model) {
+        List<Region> regions = regionService.findByName(query);
+        model.addAttribute("regions", regions);
+        
+        return "regions/index";
     }
 
     @PostMapping("/create")

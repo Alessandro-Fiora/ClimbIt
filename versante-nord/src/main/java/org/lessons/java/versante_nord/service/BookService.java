@@ -31,6 +31,10 @@ public class BookService {
         return bookOpt.get();
     }
 
+    public List<Book> findByTitleAuthorRegionCategory(String query){
+        return bookRepository.findByTitoloContainingIgnoreCaseOrAutoreContainingIgnoreCase(query, query);
+    }
+
     public Book create(Book book) {
         
         return bookRepository.save(book);

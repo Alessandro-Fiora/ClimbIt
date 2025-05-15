@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -46,6 +47,14 @@ public class BookController {
         model.addAttribute("book", book);
         
         return "books/show";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("query") String query, Model model) {
+        List<Book> books = bookService.findByTitleAuthorRegionCategory(query);
+        model.addAttribute("books", books);
+
+        return "books/index";
     }
 
     @GetMapping("/create")
