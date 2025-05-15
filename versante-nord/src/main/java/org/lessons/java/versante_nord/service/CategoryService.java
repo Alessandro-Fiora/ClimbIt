@@ -31,6 +31,10 @@ public class CategoryService {
         return categoryOpt.get();
     }
 
+    public List<Category> findByName(String query){
+        return categoryRepository.findByNomeContainingIgnoreCase(query);
+    }
+
     public Category create(Category category) {
         
         return categoryRepository.save(category);

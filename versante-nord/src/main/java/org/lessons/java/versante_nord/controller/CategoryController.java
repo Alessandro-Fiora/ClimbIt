@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -35,6 +36,13 @@ public class CategoryController {
         Category category = categoryService.getById(id);
         model.addAttribute("category", category);
         return "categories/show";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("query") String query, Model model) {
+        List<Category> categories = categoryService.findByName(query);
+        model.addAttribute("categories", categories);
+        return "categories/index";
     }
 
     @GetMapping("/create")

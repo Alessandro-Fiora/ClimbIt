@@ -31,6 +31,10 @@ public class RegionService {
         return regionOpt.get();
     }
 
+    public List<Region> findByName(String query){
+        return regionRepository.findByNomeContainingIgnoreCase(query);
+    }
+
     public Region create(Region region) {
         
         return regionRepository.save(region);

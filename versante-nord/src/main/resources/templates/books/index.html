@@ -17,7 +17,7 @@
             <div class="d-flex align-items-end">
               <h1 class="mb-3 me-3">Lista pubblicazioni</h1>
               <a
-                class="btn btn-primary mb-3 rounded-5 text-center"
+                class="add-button btn btn-primary mb-3 rounded-5 text-center"
                 th:href="@{/books/create}"
                 ><i class="fa-solid fa-plus"></i
               ></a>
@@ -87,19 +87,19 @@
                       >
                       </a>
                     </td>
-                    <td th:text="'€ ' + *{prezzo}"></td>
+                    <td th:text="'€' + *{prezzo}"></td>
                     <td th:text="*{isbn}"></td>
                     <td>
-                      <div class="d-flex justify-content-between">
+                      <div class="d-flex">
                         <a th:href="@{/books/{id}(id=*{id})}">
-                          <button class="btn btn-success rounded-3">
+                          <button class="btn btn-success rounded-3 me-2">
                             <i class="fa-solid fa-eye"></i>
                           </button>
                         </a>
                         <a
                           th:href="@{/books/edit/{id}(id=*{id}, redirect='index')}"
                         >
-                          <button class="btn btn-warning rounded-3">
+                          <button class="btn btn-warning rounded-3 me-2">
                             <i class="fa-solid fa-pencil"></i>
                           </button>
                         </a>

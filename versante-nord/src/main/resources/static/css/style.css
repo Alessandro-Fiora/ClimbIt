@@ -40,3 +40,9 @@ img.home-logo-img {
 .region-badge:hover {
   background-color: rgb(0, 110, 0) !important;
 }
+
+/* * ADD NEW BUTTON */
+
+.add-button {
+  margin-bottom: 19px !important;
+}
