@@ -16,10 +16,6 @@
           <div class="d-flex justify-content-between">
             <h1 class="mb-3">Lista regioni</h1>
             <div class="d-flex align-items-center">
-              <!-- <h3
-                class="d-inline me-2 mb-0"
-                th:text="'Ciao ' + ${username}"
-              ></h3> -->
               <a class="btn btn-primary" th:href="@{/regions/create}">
                 Aggiungi una nuova regione
               </a>
@@ -41,90 +37,92 @@
                     <td th:text="*{nome}"></td>
                     <td th:text="*{books.size()}"></td>
                     <td>
-                      <a th:href="@{/regions/{id}(id=*{id})}">
-                        <button class="btn btn-success rounded-3">
-                          <i class="fa-solid fa-eye"></i>
-                        </button>
-                      </a>
-                      <a
-                        th:href="@{/regions/edit/{id}(id=*{id}, redirect='index')}"
-                      >
-                        <button class="btn btn-warning rounded-3">
-                          <i class="fa-solid fa-pencil"></i>
-                        </button>
-                      </a>
-                      <form
-                        class="d-inline"
-                        th:action="@{/regions/delete/{id}(id=*{id})}"
-                        method="post"
-                      >
-                        <button
-                          type="button"
-                          class="btn btn-danger"
-                          data-bs-toggle="modal"
-                          th:data-bs-target="'#modal-' + ${region.id}"
+                      <div class="actions-container">
+                        <a th:href="@{/regions/{id}(id=*{id})}">
+                          <button class="btn btn-success rounded-3">
+                            <i class="fa-solid fa-eye"></i>
+                          </button>
+                        </a>
+                        <a
+                          th:href="@{/regions/edit/{id}(id=*{id}, redirect='index')}"
                         >
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                        <div
-                          class="modal fade"
-                          th:id="'modal-' + ${region.id}"
-                          data-bs-backdrop="static"
-                          data-bs-keyboard="false"
-                          tabindex="-1"
-                          aria-labelledby="staticBackdropLabel"
-                          aria-hidden="true"
+                          <button class="btn btn-warning rounded-3">
+                            <i class="fa-solid fa-pencil"></i>
+                          </button>
+                        </a>
+                        <form
+                          class="d-inline"
+                          th:action="@{/regions/delete/{id}(id=*{id})}"
+                          method="post"
                         >
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h1
-                                  class="modal-title fs-5"
-                                  id="staticBackdropLabel"
-                                >
-                                  Elimina regione [[*{nome}]]
-                                </h1>
-                                <button
-                                  type="button"
-                                  class="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
-                              <div class="modal-body">
-                                <p>
-                                  Sei sicuro? L'operazione è irreversibile<br />
-                                  <i
-                                    class="fa-solid fa-triangle-exclamation"
-                                    style="color: #ebb800"
-                                  ></i>
-                                  Verranno eliminate tutte le pubblicazioni
-                                  relative a questa regione!
-                                  <i
-                                    class="fa-solid fa-triangle-exclamation"
-                                    style="color: #ebb800"
-                                  ></i>
-                                </p>
-                              </div>
-                              <div class="modal-footer">
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Annulla
-                                </button>
-                                <button
-                                  type="submit"
-                                  class="btn btn-danger rounded-3"
-                                >
-                                  Elimina
-                                </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            th:data-bs-target="'#modal-' + ${region.id}"
+                          >
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                          <div
+                            class="modal fade"
+                            th:id="'modal-' + ${region.id}"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
+                            tabindex="-1"
+                            aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1
+                                    class="modal-title fs-5"
+                                    id="staticBackdropLabel"
+                                  >
+                                    Elimina regione [[*{nome}]]
+                                  </h1>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>
+                                    Sei sicuro? L'operazione è irreversibile<br />
+                                    <i
+                                      class="fa-solid fa-triangle-exclamation"
+                                      style="color: #ebb800"
+                                    ></i>
+                                    Verranno eliminate tutte le pubblicazioni
+                                    relative a questa regione!
+                                    <i
+                                      class="fa-solid fa-triangle-exclamation"
+                                      style="color: #ebb800"
+                                    ></i>
+                                  </p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Annulla
+                                  </button>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-danger rounded-3"
+                                  >
+                                    Elimina
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

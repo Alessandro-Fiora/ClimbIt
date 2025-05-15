@@ -19,15 +19,15 @@
                     <img class="copertina img-fluid" th:src="*{immagine}" alt="">
                 </div>
                 <div class="col-8">
-                  <div class="d-flex justify-content-between">
-                    <div>
+                  <div class="row g-auto">
+                    <div class="col-8">
                       <h1 class="fw-bold" th:text="*{titolo}" />
                       <h5 class="mb-3" th:text="*{sottotitolo}" />
                       <h6 class="fw-light mb-4" th:text="*{autore}" />
                       <h6 class="mb-4" th:text="'€ ' + *{prezzo}" />
                     </div>
-                    <div>
-                      <a th:href="@{/books/edit/{id}(id=*{id}, redirect='show')}">
+                    <div class="col-4 text-end">
+                      <a th:href="@{/books/edit/{id}(id=*{id})}">
                         <button class="btn btn-warning rounded-3">
                           <i class="fa-solid fa-pencil"></i>
                         </button>
@@ -96,14 +96,14 @@
                     </div>
                     <div class="row">
                         <div class="col-12 mb-3">
-                          <span th:each="category : ${book.categories}" class="badge category-badge rounded-pill text-bg-primary ms-1" th:text="${category.nome}"></span>
-                          <span th:if="*{region} != null" class="badge rounded-pill text-bg-success" th:text="*{region.getNome()}"></span>
+                          <a th:href="@{/categories/{id}(id=${category.id})}" th:each="category : ${book.categories}" class="badge category-badge rounded-pill text-bg-primary ms-1" th:text="${category.nome}"></a>
+                          <a th:href="@{/regions/{id}(id=${book.region.id})}" th:if="*{region} != null" class="badge rounded-pill text-bg-success" th:text="*{region.getNome()}"></a>
                         </div>
                         <div class="col-12">
                           <div class="accordion accordion-flush" id="bookShowAccordion">
                             <div th:if="*{descrizione} != null  and *{descrizione} != ''" class="accordion-item">
                               <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <button class="accordion-button collapsed ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                   Descrizione
                                 </button>
                               </h2>
@@ -115,7 +115,7 @@
                             </div>
                             <div class="accordion-item">
                               <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                <button class="accordion-button collapsed ps-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                   Dettagli
                                 </button>
                               </h2>

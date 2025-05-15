@@ -44,8 +44,8 @@
             <!-- TODO: personalizzare info utente -->
             <div class="ms-auto user-info d-flex align-items-center text-light">
               Ciao,
-              <span sec:authentication="name" class="fs-6 me-2"></span> Role:
-              <span sec:authentication="authorities" class="fs-6 me-2"></span>
+              <span sec:authentication="name" class="fs-6 me-2"></span>
+              <span th:text="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}" class="fs-6 me-2"></span>
               <a class="btn btn-sm btn-danger" href="/logout">Sign out</a>
             </div>
           </div>

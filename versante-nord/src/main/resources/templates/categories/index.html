@@ -40,90 +40,92 @@
                     <td th:text="*{nome}"></td>
                     <td th:text="*{books.size()}"></td>
                     <td>
-                      <a th:href="@{/categories/{id}(id=*{id})}">
-                        <button class="btn btn-success rounded-3">
-                          <i class="fa-solid fa-eye"></i>
-                        </button>
-                      </a>
-                      <a
-                        th:href="@{/categories/edit/{id}(id=*{id}, redirect='index')}"
-                      >
-                        <button class="btn btn-warning rounded-3">
-                          <i class="fa-solid fa-pencil"></i>
-                        </button>
-                      </a>
-                      <form
-                        class="d-inline"
-                        th:action="@{/categories/delete/{id}(id=*{id})}"
-                        method="post"
-                      >
-                        <button
-                          type="button"
-                          class="btn btn-danger"
-                          data-bs-toggle="modal"
-                          th:data-bs-target="'#modal-' + ${category.id}"
+                      <div class="actions-container">
+                        <a th:href="@{/categories/{id}(id=*{id})}">
+                          <button class="btn btn-success rounded-3">
+                            <i class="fa-solid fa-eye"></i>
+                          </button>
+                        </a>
+                        <a
+                          th:href="@{/categories/edit/{id}(id=*{id}, redirect='index')}"
                         >
-                          <i class="fa-solid fa-trash"></i>
-                        </button>
-                        <div
-                          class="modal fade"
-                          th:id="'modal-' + ${category.id}"
-                          data-bs-backdrop="static"
-                          data-bs-keyboard="false"
-                          tabindex="-1"
-                          aria-labelledby="staticBackdropLabel"
-                          aria-hidden="true"
+                          <button class="btn btn-warning rounded-3">
+                            <i class="fa-solid fa-pencil"></i>
+                          </button>
+                        </a>
+                        <form
+                          class="d-inline"
+                          th:action="@{/categories/delete/{id}(id=*{id})}"
+                          method="post"
                         >
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h1
-                                  class="modal-title fs-5"
-                                  id="staticBackdropLabel"
-                                >
-                                  Elimina categoria [[*{nome}]]
-                                </h1>
-                                <button
-                                  type="button"
-                                  class="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
-                              <div class="modal-body">
-                                <p>
-                                  Sei sicuro? L'operazione è irreversibile<br />
-                                  <i
-                                    class="fa-solid fa-triangle-exclamation"
-                                    style="color: #ebb800"
-                                  ></i>
-                                  Verranno eliminate tutte le pubblicazioni
-                                  relative a questa categoria!
-                                  <i
-                                    class="fa-solid fa-triangle-exclamation"
-                                    style="color: #ebb800"
-                                  ></i>
-                                </p>
-                              </div>
-                              <div class="modal-footer">
-                                <button
-                                  type="button"
-                                  class="btn btn-secondary"
-                                  data-bs-dismiss="modal"
-                                >
-                                  Annulla
-                                </button>
-                                <button
-                                  type="submit"
-                                  class="btn btn-danger rounded-3"
-                                >
-                                  Elimina
-                                </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            th:data-bs-target="'#modal-' + ${category.id}"
+                          >
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                          <div
+                            class="modal fade"
+                            th:id="'modal-' + ${category.id}"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
+                            tabindex="-1"
+                            aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true"
+                          >
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1
+                                    class="modal-title fs-5"
+                                    id="staticBackdropLabel"
+                                  >
+                                    Elimina categoria [[*{nome}]]
+                                  </h1>
+                                  <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>
+                                    Sei sicuro? L'operazione è irreversibile<br />
+                                    <i
+                                      class="fa-solid fa-triangle-exclamation"
+                                      style="color: #ebb800"
+                                    ></i>
+                                    Verranno eliminate tutte le pubblicazioni
+                                    relative a questa categoria!
+                                    <i
+                                      class="fa-solid fa-triangle-exclamation"
+                                      style="color: #ebb800"
+                                    ></i>
+                                  </p>
+                                </div>
+                                <div class="modal-footer">
+                                  <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                  >
+                                    Annulla
+                                  </button>
+                                  <button
+                                    type="submit"
+                                    class="btn btn-danger rounded-3"
+                                  >
+                                    Elimina
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
