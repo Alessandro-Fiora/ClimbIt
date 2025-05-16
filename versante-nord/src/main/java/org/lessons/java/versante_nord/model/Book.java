@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -58,10 +56,8 @@ public class Book {
     @Min(value = 1, message = "il campo pagine deve essere maggiore di 0")
     private Integer pagine;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id", nullable = false)
-    @JsonBackReference
-    @NotNull(message = "il campo regione è obbligatorio")
+    @ManyToOne
+    @JoinColumn(name = "region_id", nullable = true)
     private Region region;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})

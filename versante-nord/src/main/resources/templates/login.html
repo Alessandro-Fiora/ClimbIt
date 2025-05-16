@@ -20,11 +20,11 @@
                 class="login-logo-img img-fluid"
               />
             <h1>Accedi</h1>
-            <div th:if="${param.error}" class="is-invalid mb-3">
+            <div th:if="${param.error}" class="text-danger mb-3">
               Credenziali di accesso non valide
             </div>
-            <div th:if="${param.logout}" class="mb-3">
-              Hai effettuato il logout con successo
+            <div th:if="${param.logout}" class="text-danger mb-3">
+              Logout effettuato con successo
             </div>
             <form th:action="@{/login}" method="post">
               <div class="mb-3">

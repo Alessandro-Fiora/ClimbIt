@@ -22,7 +22,6 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests()
                 .requestMatchers("/books/create", "/books/edit/**").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/**").hasAuthority("ADMIN")
                 .requestMatchers("/categories", "/categories/**").hasAuthority("ADMIN")
                 .requestMatchers("/regions", "/regions/**").hasAuthority("ADMIN")
                 .requestMatchers("/books", "/books/**").hasAnyAuthority( "ADMIN")

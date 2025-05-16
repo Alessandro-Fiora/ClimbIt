@@ -2,6 +2,8 @@ package org.lessons.java.versante_nord.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class Region {
     private String nome;
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.REMOVE)
+    @JsonBackReference
     private List<Book> books;
 
 

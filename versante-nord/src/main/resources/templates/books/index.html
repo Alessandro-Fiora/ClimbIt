@@ -43,6 +43,10 @@
             </div>
           </div>
           <hr />
+          <h6
+            th:if="${books.size() > 0}"
+            th:text="'Risultati: ' + ${books.size()}"
+          />
           <div class="row">
             <div class="col-12">
               <table th:if="${books.size() > 0}" class="table mt-3">
@@ -76,7 +80,7 @@
                           class="badge region-badge rounded-pill text-bg-success ms-1"
                         ></a>
                       </span>
-                      <span th:unless="${book.region != null}">N/A</span>
+                      <span th:unless="${book.region != null}"> </span>
                     </td>
                     <td>
                       <a
@@ -172,7 +176,7 @@
               </table>
 
               <h2 th:unless="${books.size() > 0}" class="text-center">
-                No data found
+                Nessun risultato trovato
               </h2>
             </div>
           </div>
