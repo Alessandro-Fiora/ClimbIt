@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +28,20 @@ public class BookRestController {
     private BookService bookService;
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<List<Book>> index() {
         return new ResponseEntity<List<Book>>(bookService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    @CrossOrigin(origins = "http://localhost:5173")
+    public ResponseEntity<List<Book>> search(@RequestParam("query") String query){
+
+        return new ResponseEntity<List<Book>>(bookService.findByTitleAuthorRegionCategory(query), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Book> show(@PathVariable Integer id){
         Optional <Book> bookOpt = bookService.findById(id);
 
@@ -42,11 +53,13 @@ public class BookRestController {
     }
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Book> store(@RequestBody Book book){
         return new ResponseEntity<Book>(bookService.create(book), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Book> update(@PathVariable Integer id, @RequestBody Book book){
         if (bookService.findById(id).isEmpty()) {
             return new ResponseEntity<Book>(HttpStatus.NOT_FOUND);
@@ -57,6 +70,7 @@ public class BookRestController {
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Book> destroy(@PathVariable Integer id){
         if (bookService.findById(id).isEmpty()) {
             return new ResponseEntity<Book>(HttpStatus.NOT_FOUND);
