@@ -2,7 +2,7 @@ package org.lessons.java.versante_nord.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -26,8 +26,8 @@ public class Category {
     private String nome;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-@JsonBackReference
-private List<Book> books;
+    @JsonIgnoreProperties("categories")
+    private List<Book> books;
 
 
     public Integer getId() {
