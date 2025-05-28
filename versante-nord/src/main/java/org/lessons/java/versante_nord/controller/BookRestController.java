@@ -33,13 +33,6 @@ public class BookRestController {
         return new ResponseEntity<List<Book>>(bookService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/search")
-    @CrossOrigin(origins = "http://localhost:5173")
-    public ResponseEntity<List<Book>> search(@RequestParam("query") String query){
-
-        return new ResponseEntity<List<Book>>(bookService.findByTitleAuthorRegionCategory(query), HttpStatus.OK);
-    }
-
     @GetMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<Book> show(@PathVariable Integer id){
