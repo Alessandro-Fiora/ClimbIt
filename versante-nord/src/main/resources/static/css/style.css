@@ -3,6 +3,10 @@ a {
   color: inherit;
 }
 
+#navbar {
+  height: 65px !important;
+}
+
 /* * ACCORDION */
 
 .accordion-button:focus {
