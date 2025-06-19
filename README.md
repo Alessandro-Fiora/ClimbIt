@@ -1,4 +1,4 @@
-##Versante Nord
+Versante Nord
 
 Versante Nord è un’app full stack per la gestione e consultazione di guide outdoor (arrampicata, trekking, ecc.).
 
