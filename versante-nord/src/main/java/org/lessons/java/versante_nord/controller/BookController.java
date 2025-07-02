@@ -60,7 +60,8 @@ public class BookController {
     @GetMapping("/create")
     public String create(Model model){
         Book book = new Book();
-        book.setImmagine("https://fakeimg.pl/456x638/ff6666/ffffff?text=Book%20Cover");
+        // inserisco placeholder per comodità di testing
+        book.setImmagine("https://placehold.co/456x638");
         model.addAttribute("book", book);
         model.addAttribute("regions", regionService.findAll());
         model.addAttribute("categories", categoryService.findAll());
